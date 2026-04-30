@@ -7,9 +7,10 @@ import { useState } from "react";
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/programs", label: "Programs" },
+  { href: "/coaches", label: "Coaches" },
+  { href: "/events", label: "Events" },
+  { href: "/news", label: "News" },
   { href: "/register", label: "Register" },
-  { href: "/tournaments", label: "Events" },
-  { href: "/sponsors", label: "Sponsors" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -18,57 +19,82 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="The Ville Logo" width={50} height={50} />
-          <div>
-            <p className="text-lg font-black">THE VILLE</p>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-red-500">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6">
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="flex items-center gap-3"
+        >
+          <Image
+            src="/logo.png"
+            alt="The Ville Athletics Logo"
+            width={46}
+            height={46}
+            priority
+          />
+
+          <div className="leading-tight">
+            <p className="text-base font-black uppercase tracking-tight text-white">
+              The Ville
+            </p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
               Athletics
             </p>
           </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden items-center gap-8 text-sm font-black uppercase text-zinc-300 md:flex">
+        <div className="hidden items-center gap-6 text-sm font-bold uppercase text-zinc-300 lg:flex">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-red-500">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* Desktop Button */}
         <Link
           href="/register"
-          className="hidden rounded-full bg-white px-5 py-2 text-sm font-black uppercase text-black hover:bg-red-600 hover:text-white md:block"
+          className="hidden rounded-full bg-[var(--ville-red)] px-5 py-2 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)] md:inline-flex lg:hidden xl:inline-flex"
         >
           Join
         </Link>
 
-        {/* Hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="flex flex-col gap-1 md:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 lg:hidden"
+          aria-label="Open menu"
+          aria-expanded={open}
         >
-          <span className="h-[2px] w-6 bg-white"></span>
-          <span className="h-[2px] w-6 bg-white"></span>
-          <span className="h-[2px] w-6 bg-white"></span>
+          <span
+            className={`h-0.5 w-5 bg-white transition ${
+              open ? "translate-y-2 rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`h-0.5 w-5 bg-white transition ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`h-0.5 w-5 bg-white transition ${
+              open ? "-translate-y-2 -rotate-45" : ""
+            }`}
+          />
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {open && (
-        <div className="border-t border-white/10 bg-black px-6 py-6 md:hidden">
-          <div className="flex flex-col gap-6 text-lg font-bold uppercase">
+        <div className="border-t border-white/10 bg-black px-5 py-6 lg:hidden">
+          <div className="flex flex-col gap-5 text-lg font-black uppercase text-white">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="hover:text-red-500"
+                className="transition hover:text-[var(--ville-red-bright)]"
               >
                 {link.label}
               </Link>
@@ -77,9 +103,9 @@ export default function Navbar() {
             <Link
               href="/register"
               onClick={() => setOpen(false)}
-              className="mt-4 rounded-full bg-red-700 px-6 py-3 text-center font-black text-white"
+              className="mt-2 rounded-full bg-[var(--ville-red)] px-6 py-3 text-center text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
             >
-              Join Now
+              Join The Ville
             </Link>
           </div>
         </div>

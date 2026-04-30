@@ -9,7 +9,7 @@ export default function SponsorsPage() {
   return (
     <main className="mx-auto max-w-7xl px-6 py-20">
       <p className="text-sm font-black uppercase tracking-[0.3em] text-red-500">Sponsors</p>
-      <h1 className="mt-4 text-5xl font-black">Support The Ville.</h1>
+      <h1 className="mt-4 text-5xl font-black">Support The Ville</h1>
 
       <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
         Sponsorships help reduce financial barriers for families while increasing
