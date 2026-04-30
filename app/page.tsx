@@ -43,9 +43,9 @@ export default function Home() {
             </p>
 
             <h1 className="mt-4 text-5xl font-black uppercase leading-[0.9] md:text-6xl">
-              Build the athlete.
+              Build the athlete
               <span className="block text-[var(--ville-red-bright)]">
-                Build the standard.
+                Build the standard
               </span>
             </h1>
 

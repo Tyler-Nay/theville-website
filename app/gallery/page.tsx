@@ -36,7 +36,7 @@ export default function GalleryPage() {
         <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
           Moments from
           <span className="block text-[var(--ville-red-bright)]">
-            The Ville.
+            The Ville
           </span>
         </h1>
 
@@ -74,7 +74,7 @@ export default function GalleryPage() {
           </p>
 
           <h2 className="mt-4 text-3xl font-black uppercase md:text-5xl">
-            Building the story.
+            Building the story
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl leading-7 text-zinc-300">

@@ -22,9 +22,9 @@ export default function AboutPage() {
         </p>
 
         <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
-          Built for athletes.
+          Built for athletes
           <span className="block text-[var(--ville-red-bright)] whitespace-nowrap">
-            Built for Las Vegas.
+            Built for Las Vegas
           </span>
         </h1>
 
@@ -63,10 +63,10 @@ export default function AboutPage() {
           </p>
 
           <h2 className="mt-4 text-3xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl">
-            <span className="block">Train with purpose.</span>
-            <span className="block">Compete with pride.</span>
+            <span className="block">Train with purpose</span>
+            <span className="block">Compete with pride</span>
             <span className="block text-[var(--ville-red-bright)]">
-              Represent something bigger.
+              Represent something bigger
             </span>
           </h2>
 
