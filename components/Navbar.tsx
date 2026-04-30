@@ -5,12 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/about", label: "About" },
   { href: "/programs", label: "Programs" },
-  { href: "/coaches", label: "Coaches" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/register", label: "Register" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

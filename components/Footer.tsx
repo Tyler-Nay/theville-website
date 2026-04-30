@@ -43,7 +43,7 @@ export default function Footer() {
 
           <div className="mt-4 text-zinc-400">
             <p>Las Vegas, NV</p>
-            <p className="mt-2">theville@example.com</p>
+            <p className="mt-2">will.thevillebasketball@gmail.com</p>
           </div>
         </div>
       </div>

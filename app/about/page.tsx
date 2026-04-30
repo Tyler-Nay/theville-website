@@ -1,16 +1,16 @@
 export default function AboutPage() {
   const values = [
     {
-      title: "Our Mission",
-      text: "Develop athletes through structured training, competition, accountability, and strong character.",
+      title: "Community",
+      text: "Creating a positive Las Vegas-based program where local families and athletes feel supported.",
     },
     {
-      title: "Our Focus",
-      text: "Build skill, discipline, teamwork, confidence, and competitive growth across every sport.",
+      title: "Development",
+      text: "Helping athletes build skill, confidence, discipline, teamwork, and competitive growth.",
     },
     {
-      title: "Our Standard",
-      text: "Effort, respect, consistency, and commitment every practice, every game, every event.",
+      title: "Opportunity",
+      text: "Providing structured programs, events, and pathways for athletes across multiple sports.",
     },
   ];
 
@@ -23,16 +23,21 @@ export default function AboutPage() {
 
         <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
           Built for athletes.
-          <span className="block text-[var(--ville-red-bright)]">
-            Built for growth.
+          <span className="block text-[var(--ville-red-bright)] whitespace-nowrap">
+            Built for Las Vegas.
           </span>
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
-          The Ville Athletics is a Las Vegas youth sports organization focused
-          on developing disciplined, competitive, and well-rounded athletes. We
-          provide structured training, competitive opportunities, and a community
-          where athletes can grow on and off the court, field, and course.
+          The Ville Athletics is a community-driven youth sports organization
+          based in Las Vegas. We serve athletes and families through structured
+          programs in basketball, soccer, cross country, and flag football.
+        </p>
+
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
+          Our goal is to create a positive environment where athletes can
+          develop discipline, confidence, teamwork, and character while building
+          lasting connections in the local community.
         </p>
       </section>
 
@@ -46,45 +51,35 @@ export default function AboutPage() {
               {item.title}
             </h2>
 
-            <p className="mt-4 leading-7 text-zinc-400">
-              {item.text}
-            </p>
+            <p className="mt-4 leading-7 text-zinc-400">{item.text}</p>
           </div>
         ))}
       </section>
 
       <section className="mt-16">
-        <div className="mx-auto max-w-4xl text-center rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 to-black px-6 py-12 md:px-10 md:py-14">
+        <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 to-black px-6 py-12 text-center md:px-10 md:py-14">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
+            The Ville Standard
+          </p>
 
-        <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
-          The Ville Standard
-        </p>
+          <h2 className="mt-4 text-3xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl">
+            <span className="block">Train with purpose.</span>
+            <span className="block">Compete with pride.</span>
+            <span className="block text-[var(--ville-red-bright)]">
+              Represent something bigger.
+            </span>
+          </h2>
 
-        <h2 className="mt-4 text-3xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl">
-          <span className="block">Train with purpose.</span>
-          <span className="block">Compete with pride.</span>
-          <span className="block text-[var(--ville-red-bright)]">
-            Represent something bigger.
-          </span>
-        </h2>
-
-        <p className="mt-6 mx-auto max-w-2xl text-zinc-300 leading-7">
-          Whether an athlete is in basketball, soccer, cross country, or flag
-          football, our goal is to create an environment where they are expected
-          to show effort, discipline, respect, and consistency.
-        </p>
-
-        <div className="mt-8 flex justify-center">
-          <a
-            href="/register"
-            className="rounded-full bg-[var(--ville-red)] px-6 py-3 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
-          >
-            Register Now
-          </a>
+          <div className="mt-8 flex justify-center">
+            <a
+              href="/register"
+              className="rounded-full bg-[var(--ville-red)] px-6 py-3 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+            >
+              Register Now
+            </a>
+          </div>
         </div>
-
-      </div>
-    </section>
+      </section>
     </main>
   );
 }
