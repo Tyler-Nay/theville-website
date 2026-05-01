@@ -21,12 +21,12 @@ export default function AboutPage() {
           About
         </p>
 
-       <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-6xl lg:text-7xl">
-          Built for athletes
-          <span className="block text-[var(--ville-red-bright)]">
-            Built for <span className="block xl:inline">Las Vegas</span>
-          </span>
-        </h1>
+       <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">
+        <span className="block text-white">Built for</span>
+        <span className="block text-[var(--ville-red-bright)]">Athletes.</span>
+        <span className="block text-white">Built for</span>
+        <span className="block text-[var(--ville-red-bright)]">Las Vegas.</span>
+      </h1>
 
         <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
           The Ville Athletics is a community-driven youth sports organization
