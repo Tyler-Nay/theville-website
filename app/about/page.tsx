@@ -21,10 +21,10 @@ export default function AboutPage() {
           About
         </p>
 
-        <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
+       <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-6xl lg:text-7xl">
           Built for athletes
           <span className="block text-[var(--ville-red-bright)]">
-          Built for <span className="block md:inline">Las Vegas.</span>
+            Built for <span className="block xl:inline">Las Vegas</span>
           </span>
         </h1>
 
