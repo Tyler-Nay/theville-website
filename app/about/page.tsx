@@ -23,9 +23,9 @@ export default function AboutPage() {
 
        <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">
         <span className="block text-white">Built for</span>
-        <span className="block text-[var(--ville-red-bright)]">Athletes.</span>
+        <span className="block text-[var(--ville-red-bright)]">Athletes</span>
         <span className="block text-white">Built for</span>
-        <span className="block text-[var(--ville-red-bright)]">Las Vegas.</span>
+        <span className="block text-[var(--ville-red-bright)]">Las Vegas</span>
       </h1>
 
         <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
