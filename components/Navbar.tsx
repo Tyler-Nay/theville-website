@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { FaInstagram } from "react-icons/fa";
+
+const instagramUrl = "https://instagram.com/thevillelv";
 
 const navLinks = [
   { href: "/programs", label: "Programs" },
@@ -44,7 +47,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm font-bold uppercase text-zinc-300 lg:flex">
+        <div className="hidden items-center gap-5 text-sm font-bold uppercase text-zinc-300 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -54,6 +57,16 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
+          <a
+            href="https://www.instagram.com/thevillelv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 transition hover:text-[var(--ville-red-bright)]"
+          >
+            <FaInstagram size={17} />
+            <span>Follow Us</span>
+          </a>
         </div>
 
         <Link
@@ -100,6 +113,17 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            <a
+              href="https://www.instagram.com/thevillelv"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 transition hover:text-[var(--ville-red-bright)]"
+            >
+              <FaInstagram size={20} />
+              Follow Us On Instagram
+            </a>
 
             <Link
               href="/register"

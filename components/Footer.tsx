@@ -1,3 +1,5 @@
+import { FaInstagram } from "react-icons/fa";
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black px-6 py-12">
@@ -8,6 +10,7 @@ export default function Footer() {
           <h3 className="text-xl font-black uppercase text-white">
             The Ville
           </h3>
+
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
             Athletics
           </p>
@@ -16,6 +19,20 @@ export default function Footer() {
             A Las Vegas-based, community-driven youth sports organization
             focused on developing athletes and supporting local families.
           </p>
+
+          {/* INSTAGRAM */}
+          <a
+            href="https://instagram.com/thevillelv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 text-zinc-400 transition hover:text-[var(--ville-red-bright)]"
+          >
+            <FaInstagram size={20} />
+
+            <span className="text-sm font-medium">
+              Follow us on Instagram
+            </span>
+          </a>
         </div>
 
         {/* MIDDLE - LINKS */}
