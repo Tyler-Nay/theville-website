@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata = {
-  metadataBase: new URL("https://thevillelv.com"),
+  metadataBase: new URL("https://www.thevillelv.com"),
 
   alternates: {
     canonical: "/",
@@ -27,7 +27,7 @@ export const metadata = {
     title: "The Ville Athletics | Las Vegas Youth Sports",
     description:
       "Community-driven youth sports programs in Las Vegas for basketball, soccer, cross country, and flag football.",
-    url: "https://thevillelv.com",
+    url: "https://www.thevillelv.com",
     siteName: "The Ville Athletics",
     images: [
       {
