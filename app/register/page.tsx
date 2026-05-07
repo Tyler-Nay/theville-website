@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
         <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-zinc-300 md:mx-0">
           Program registration, memberships, waivers, rosters, schedules, and
-          communication are managed through TeamSnap.
+          communication are managed through GymDesk.
         </p>
       </section>
 
@@ -65,7 +65,7 @@ export default function RegisterPage() {
               href={item.link}
               className="mt-auto inline-flex w-fit rounded-full bg-[var(--ville-red)] px-5 py-2 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
             >
-              TeamSnap Coming Soon
+              Registration coming soon
             </a>
           </div>
         ))}
