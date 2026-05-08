@@ -15,33 +15,33 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-20">
-      <section className="max-w-4xl">
+    <main className="mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
+      <section className="mx-auto max-w-5xl">
         <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
           About
         </p>
 
-       <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">
-        <span className="block text-white">Built for</span>
-        <span className="block text-[var(--ville-red-bright)]">Athletes</span>
-        <span className="block text-white">Built for</span>
-        <span className="block text-[var(--ville-red-bright)]">Las Vegas</span>
-      </h1>
+        <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">
+          <span className="block text-white">Built for</span>
+          <span className="block text-[var(--ville-red-bright)]">Athletes</span>
+          <span className="block text-white">Built for</span>
+          <span className="block text-[var(--ville-red-bright)]">Las Vegas</span>
+        </h1>
 
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
+        <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
           The Ville Athletics is a community-driven youth sports organization
           based in Las Vegas. We serve athletes and families through structured
           programs in basketball, soccer, cross country, and flag football.
         </p>
 
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
+        <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
           Our goal is to create a positive environment where athletes can
           develop discipline, confidence, teamwork, and character while building
           lasting connections in the local community.
         </p>
       </section>
 
-      <section className="mt-14 grid gap-6 md:grid-cols-3">
+      <section className="mt-14 grid w-full gap-6 md:grid-cols-3">
         {values.map((item) => (
           <div
             key={item.title}
@@ -56,7 +56,7 @@ export default function AboutPage() {
         ))}
       </section>
 
-      <section className="mt-16">
+      <section className="mt-16 w-full">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 to-black px-6 py-12 text-center md:px-10 md:py-14">
           <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
             The Ville Standard

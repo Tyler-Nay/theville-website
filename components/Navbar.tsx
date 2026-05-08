@@ -7,130 +7,223 @@ import { FaInstagram } from "react-icons/fa";
 
 const instagramUrl = "https://instagram.com/thevillelv";
 
-const navLinks = [
-  { href: "/programs", label: "Programs" },
-  { href: "/events", label: "Events" },
-  { href: "/news", label: "News" },
-  { href: "/register", label: "Register" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-xl">
+      <nav className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-6 py-2">
+        
+        {/* MOBILE LOGO */}
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="flex items-center gap-3"
+          className="flex items-center lg:hidden"
         >
           <Image
             src="/logo.png"
             alt="The Ville Athletics Logo"
-            width={46}
-            height={46}
+            width={120}
+            height={120}
             priority
+            className="drop-shadow-[0_0_100px_rgba(122,0,25,0.35)]"
           />
-
-          <div className="leading-tight">
-            <p className="text-base font-black uppercase tracking-tight text-white">
-              The Ville
-            </p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
-              Athletics
-            </p>
-          </div>
         </Link>
 
-        <div className="hidden items-center gap-5 text-sm font-bold uppercase text-zinc-300 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* LEFT LINKS */}
+        <div className="flex items-center justify-end gap-6 text-base font-bold uppercase tracking-wide text-zinc-300">
+          <Link
+            href="/programs"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Programs
+          </Link>
+
+          <Link
+            href="/events"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Events
+          </Link>
+
+          <Link
+            href="/news"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            News
+          </Link>
+
+          <Link
+            href="/gallery"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Gallery
+          </Link>
+        </div>
+
+        {/* CENTER LOGO */}
+        <Link
+          href="/"
+          className="hidden items-center justify-center lg:flex"
+        >
+          <Image
+            src="/logo.png"
+            alt="The Ville Athletics Logo"
+            width={150}
+            height={150}
+            priority
+            className="drop-shadow-[0_0_30px_rgba(122,0,25,0.45)]"
+          />
+        </Link>
+
+       {/* RIGHT LINKS */}
+        <div className="flex items-center justify-start gap-6 text-base font-bold uppercase tracking-wide text-zinc-300">
+          <Link
+            href="/faq"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            FAQ
+          </Link>
+
+          <Link
+            href="/about"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            About
+          </Link>
+
+          <Link
+            href="/contact"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Contact
+          </Link>
 
           <a
-            href="https://www.instagram.com/thevillelv"
+            href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 transition hover:text-[var(--ville-red-bright)]"
           >
-            <FaInstagram size={17} />
+            <FaInstagram size={20} />
             <span>Follow Us</span>
           </a>
         </div>
 
-        <Link
-          href="/register"
-          className="hidden rounded-full bg-[var(--ville-red)] px-5 py-2 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)] md:inline-flex lg:hidden xl:inline-flex"
-        >
-          Join
-        </Link>
+        {/* REGISTER BUTTON */}
+        <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 xl:block">
+          <Link
+            href="/register"
+            className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-base font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+          >
+            Register
+          </Link>
+        </div>
 
+        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setOpen(!open)}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 lg:hidden"
+          className="flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 lg:hidden"
           aria-label="Open menu"
           aria-expanded={open}
         >
           <span
-            className={`h-0.5 w-5 bg-white transition ${
+            className={`h-0.5 w-6 bg-white transition ${
               open ? "translate-y-2 rotate-45" : ""
             }`}
           />
+
           <span
-            className={`h-0.5 w-5 bg-white transition ${
+            className={`h-0.5 w-6 bg-white transition ${
               open ? "opacity-0" : ""
             }`}
           />
+
           <span
-            className={`h-0.5 w-5 bg-white transition ${
+            className={`h-0.5 w-6 bg-white transition ${
               open ? "-translate-y-2 -rotate-45" : ""
             }`}
           />
         </button>
       </nav>
 
+      {/* MOBILE MENU */}
       {open && (
-        <div className="border-t border-white/10 bg-black px-5 py-6 lg:hidden">
-          <div className="flex flex-col gap-5 text-lg font-black uppercase text-white">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="transition hover:text-[var(--ville-red-bright)]"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="border-t border-white/10 bg-black px-6 py-8 lg:hidden">
+          <div className="flex flex-col gap-6 text-lg font-black uppercase tracking-wide text-white">
+            <Link
+              href="/programs"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Programs
+            </Link>
+
+            <Link
+              href="/events"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Events
+            </Link>
+
+            <Link
+              href="/news"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              News
+            </Link>
+
+            <Link
+              href="/gallery"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Gallery
+            </Link>
+
+            <Link
+              href="/faq"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              FAQ
+            </Link>
+
+            <Link
+              href="/about"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              About
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Contact
+            </Link>
 
             <a
-              href="https://www.instagram.com/thevillelv"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 transition hover:text-[var(--ville-red-bright)]"
+              className="flex items-center gap-3 transition hover:text-[var(--ville-red-bright)]"
             >
-              <FaInstagram size={20} />
+              <FaInstagram size={22} />
               Follow Us On Instagram
             </a>
 
             <Link
               href="/register"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-[var(--ville-red)] px-6 py-3 text-center text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+              className="mt-2 rounded-full bg-[var(--ville-red)] px-7 py-4 text-center text-base font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
             >
-              Join The Ville
+              Register
             </Link>
           </div>
         </div>

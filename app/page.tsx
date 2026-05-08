@@ -25,62 +25,61 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative bg-black">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-20 md:grid-cols-2">
-          {/* LOGO */}
-          <div className="order-1 flex justify-center md:order-2 md:justify-end">
-            <img
-              src="/logo.png"
-              alt="The Ville Logo"
-              className="w-[220px] md:w-[400px] lg:w-[450px] drop-shadow-[0_0_40px_rgba(122,0,25,0.5)]"
-            />
-          </div>
+      <section className="relative flex min-h-[80vh] items-center justify-center bg-black">
+        <div className="mx-auto max-w-7xl px-6 py-28 text-center">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
+            Las Vegas Youth Athletics
+          </p>
 
-          {/* TEXT */}
-          <div className="order-2 text-center md:order-1 md:text-left">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
-              Las Vegas Youth Athletics
-            </p>
+          <h1 className="mt-6 text-6xl font-black uppercase leading-[0.9] md:text-8xl">
+            <span className="block text-white">
+              Build the
+            </span>
 
-            <h1 className="mt-4 text-5xl font-black uppercase leading-[0.9] md:text-6xl">
-              Build the athlete
-              <span className="block text-[var(--ville-red-bright)]">
-                Build the standard
-              </span>
-            </h1>
+            <span className="block">
+              Athlete
+            </span>
 
-            <p className="mx-auto mt-6 max-w-xl text-zinc-300 md:mx-0">
-              The Ville Athletics is a Las Vegas-based, community-driven youth
-              sports organization serving athletes from grades K–12.
-            </p>
+            <span className="mt-2 block text-[var(--ville-red-bright)]">
+              Build the
+            </span>
 
-            <p className="mx-auto mt-4 max-w-xl text-zinc-400 md:mx-0">
-              Built to support local families, develop disciplined athletes, and
-              create positive opportunities through basketball, soccer, cross
-              country, and flag football.
-            </p>
+            <span className="block text-[var(--ville-red-bright)]">
+              Standard
+            </span>
+          </h1>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
-              <a
-                href="/register"
-                className="rounded-full bg-[var(--ville-red)] px-6 py-3 font-bold text-white hover:bg-[var(--ville-red-bright)]"
-              >
-                Register
-              </a>
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-zinc-300">
+            The Ville Athletics is a Las Vegas-based, community-driven youth sports
+            organization serving athletes from grades K–12.
+          </p>
 
-              <a
-                href="/programs"
-                className="rounded-full border border-white/20 px-6 py-3 font-bold text-white hover:border-[var(--ville-red)]"
-              >
-                Programs
-              </a>
-            </div>
+          <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
+            Built to support local families, develop disciplined athletes, and create
+            positive opportunities through basketball, soccer, cross country, and flag
+            football.
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href="/register"
+              className="rounded-full bg-[var(--ville-red)] px-8 py-4 text-base font-bold text-white transition hover:bg-[var(--ville-red-bright)]"
+            >
+              Register
+            </a>
+
+            <a
+              href="/programs"
+              className="rounded-full border border-white/20 px-8 py-4 text-base font-bold text-white transition hover:border-[var(--ville-red)]"
+            >
+              Programs
+            </a>
           </div>
         </div>
       </section>
 
       {/* PROGRAMS SECTION */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
         <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
           Programs
         </p>
@@ -94,11 +93,11 @@ export default function Home() {
           find the right fit for their athlete.
         </p>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
           {programs.map((program) => (
             <div
               key={program.name}
-              className="flex flex-col items-start rounded-2xl border border-white/10 bg-zinc-900 px-5 py-5 transition hover:border-[var(--ville-red)]"
+              className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900 px-5 py-5 text-center transition hover:border-[var(--ville-red)]"
             >
               <p className="text-sm font-bold text-[var(--ville-red-bright)]">
                 {program.price}
