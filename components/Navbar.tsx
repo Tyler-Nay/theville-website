@@ -31,7 +31,7 @@ export default function Navbar() {
         </Link>
 
         {/* LEFT LINKS */}
-        <div className="flex items-center justify-end gap-6 text-base font-bold uppercase tracking-wide text-zinc-300">
+        <div className="hidden items-center justify-end gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
           <Link
             href="/programs"
             className="transition hover:text-[var(--ville-red-bright)]"
@@ -77,7 +77,7 @@ export default function Navbar() {
         </Link>
 
        {/* RIGHT LINKS */}
-        <div className="flex items-center justify-start gap-6 text-base font-bold uppercase tracking-wide text-zinc-300">
+        <div className="hidden items-center justify-start gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
           <Link
             href="/faq"
             className="transition hover:text-[var(--ville-red-bright)]"
