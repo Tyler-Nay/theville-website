@@ -12,23 +12,56 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-xl">
-      <nav className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-6 py-2">
-        
-        {/* MOBILE LOGO */}
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          className="flex items-center lg:hidden"
+      <nav className="relative mx-auto grid max-w-7xl grid-cols-3 items-center px-4 py-2 lg:grid-cols-[1fr_auto_1fr] lg:px-6">
+
+        {/* MOBILE MENU BUTTON */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-10 w-10 items-center justify-center justify-self-start rounded-full border border-white/10 bg-white/5 lg:hidden"
+          aria-label="Open menu"
+          aria-expanded={open}
         >
-          <Image
-            src="/logo.png"
-            alt="The Ville Athletics Logo"
-            width={120}
-            height={120}
-            priority
-            className="drop-shadow-[0_0_100px_rgba(122,0,25,0.35)]"
-          />
-        </Link>
+          <div className="flex flex-col gap-1.5">
+            <span
+              className={`block h-0.5 w-6 bg-white transition ${
+                open ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
+
+            <span
+              className={`block h-0.5 w-6 bg-white transition ${
+                open ? "opacity-0" : ""
+              }`}
+            />
+
+            <span
+              className={`block h-0.5 w-6 bg-white transition ${
+                open ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
+          </div>
+        </button>
+
+        {/* MOBILE LOGO */}
+        <div className="flex justify-center lg:hidden">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center"
+          >
+            <Image
+              src="/logo.png"
+              alt="The Ville Athletics Logo"
+              width={105}
+              height={105}
+              priority
+              className="drop-shadow-[0_0_100px_rgba(122,0,25,0.35)]"
+            />
+          </Link>
+        </div>
+
+        {/* MOBILE SPACER */}
+        <div className="lg:hidden" />
 
         {/* LEFT LINKS */}
         <div className="hidden items-center justify-end gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
@@ -76,7 +109,7 @@ export default function Navbar() {
           />
         </Link>
 
-       {/* RIGHT LINKS */}
+        {/* RIGHT LINKS */}
         <div className="hidden items-center justify-start gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
           <Link
             href="/faq"
@@ -119,32 +152,6 @@ export default function Navbar() {
             Register
           </Link>
         </div>
-
-        {/* MOBILE MENU BUTTON */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 lg:hidden"
-          aria-label="Open menu"
-          aria-expanded={open}
-        >
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "translate-y-2 rotate-45" : ""
-            }`}
-          />
-
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "-translate-y-2 -rotate-45" : ""
-            }`}
-          />
-        </button>
       </nav>
 
       {/* MOBILE MENU */}
