@@ -69,10 +69,21 @@ export default function Footer() {
             </a>
 
             <a
-              href="/register"
+              href="https://the-ville.gymdesk.com/signup"
+              target="_blank"
+              rel="noopener noreferrer"
               className="transition hover:text-[var(--ville-red-bright)]"
             >
               Register
+            </a>
+
+            <a
+              href="https://the-ville.gymdesk.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Portal
             </a>
 
             <a

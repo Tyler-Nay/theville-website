@@ -6,13 +6,15 @@ import { useState } from "react";
 import { FaInstagram } from "react-icons/fa";
 
 const instagramUrl = "https://instagram.com/thevillelv";
+const registerUrl = "https://the-ville.gymdesk.com/signup";
+const parentPortalUrl = "https://the-ville.gymdesk.com/login";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-xl">
-      <nav className="relative mx-auto grid max-w-7xl grid-cols-3 items-center px-4 py-2 lg:grid-cols-[1fr_auto_1fr] lg:px-6">
+      <nav className="relative mx-auto grid max-w-7xl grid-cols-3 items-center px-4 py-2 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:max-w-[calc(100vw-220px)]">
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -64,7 +66,7 @@ export default function Navbar() {
         <div className="lg:hidden" />
 
         {/* LEFT LINKS */}
-        <div className="hidden items-center justify-end gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
+        <div className="hidden items-center justify-end gap-5 text-sm font-bold uppercase tracking-wide text-zinc-300 lg:flex">
           <Link
             href="/programs"
             className="transition hover:text-[var(--ville-red-bright)]"
@@ -110,7 +112,7 @@ export default function Navbar() {
         </Link>
 
         {/* RIGHT LINKS */}
-        <div className="hidden items-center justify-start gap-6 text-base font-bold uppercase tracking-wide text-zinc-300 lg:flex">
+        <div className="hidden items-center justify-start gap-5 text-sm font-bold uppercase tracking-wide text-zinc-300 lg:flex">
           <Link
             href="/faq"
             className="transition hover:text-[var(--ville-red-bright)]"
@@ -123,6 +125,15 @@ export default function Navbar() {
             className="transition hover:text-[var(--ville-red-bright)]"
           >
             About
+          </Link>
+
+          <Link
+            href={parentPortalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Portal
           </Link>
 
           <Link
@@ -142,17 +153,19 @@ export default function Navbar() {
             <span>Follow Us</span>
           </a>
         </div>
-
-        {/* REGISTER BUTTON */}
-        <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 xl:block">
-          <Link
-            href="/register"
-            className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-base font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
-          >
-            Register
-          </Link>
-        </div>
       </nav>
+
+      {/* DESKTOP REGISTER BUTTON */}
+      <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 xl:block">
+        <Link
+          href={registerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-base font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+        >
+          Register
+        </Link>
+      </div>
 
       {/* MOBILE MENU */}
       {open && (
@@ -205,6 +218,15 @@ export default function Navbar() {
             >
               About
             </Link>
+            <Link
+              href={parentPortalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+             Portal
+            </Link>
 
             <Link
               href="/contact"
@@ -226,7 +248,9 @@ export default function Navbar() {
             </a>
 
             <Link
-              href="/register"
+              href={registerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-[var(--ville-red)] px-7 py-4 text-center text-base font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
             >

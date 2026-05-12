@@ -67,10 +67,12 @@ export default function ProgramsPage() {
             </p>
 
             <a
-              href="/register"
-              className="mt-auto inline-flex rounded-full bg-[var(--ville-red)] px-5 py-2 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+              href="https://the-ville.gymdesk.com/signup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-flex rounded-full bg-[var(--ville-red)] px-5 py-2 text-sm font-black uppercase tracking-wide text-white transition hover:scale-105 hover:bg-[var(--ville-red-bright)]"
             >
-              Register
+              Register Now
             </a>
           </div>
         ))}

@@ -62,7 +62,9 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="/register"
+              href="https://the-ville.gymdesk.com/signup"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-[var(--ville-red)] px-8 py-4 text-base font-bold text-white transition hover:bg-[var(--ville-red-bright)]"
             >
               Register
