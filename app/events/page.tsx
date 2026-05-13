@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabaseClient";
 
 type Event = {
   id: number;
@@ -46,8 +46,9 @@ export default function EventsPage() {
       const { data, error } = await supabase
         .from("events")
         .select("*")
-        .gte("event_date", today)
-        .order("event_date", { ascending: true });
+        .eq("published", true)
+        .gte("expires_at", new Date().toISOString())
+        .order("event_datetime", { ascending: true });
 
       if (!error && data) {
         setEvents(data);

@@ -94,6 +94,13 @@ export default function Navbar() {
           >
             Gallery
           </Link>
+
+          <Link
+            href="/sponsors"
+            className="transition hover:text-[var(--ville-red-bright)]"
+          >
+            Sponsors
+          </Link>
         </div>
 
         {/* CENTER LOGO */}
@@ -193,6 +200,14 @@ export default function Navbar() {
               className="transition hover:text-[var(--ville-red-bright)]"
             >
               News
+            </Link>
+
+            <Link
+              href="/sponsors"
+              onClick={() => setOpen(false)}
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Sponsors
             </Link>
 
             <Link

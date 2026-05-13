@@ -60,6 +60,12 @@ export default function Footer() {
             >
               Gallery
             </a>
+            <a
+              href="/sponsors"
+              className="transition hover:text-[var(--ville-red-bright)]"
+            >
+              Sponsors
+            </a>
 
             <a
               href="/faq"

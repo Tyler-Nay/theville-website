@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabaseClient";
 
 type Post = {
   id: number;
@@ -33,7 +33,9 @@ export default function NewsPage() {
       const { data, error } = await supabase
         .from("announcements")
         .select("*")
-        .order("created_at", { ascending: false });
+        .eq("published", true)
+        .gte("expires_at", new Date().toISOString())
+        .order("expires_at", { ascending: true });;
 
       if (!error && data) {
         setPosts(data);
