@@ -2,22 +2,22 @@ const programs = [
   {
     name: "Basketball",
     grades: "Grades K–5, 6–8, High School",
-    price: "$155/month",
+    price: "$159/month",
   },
   {
     name: "Soccer",
     grades: "Grades K–5, 6–8",
-    price: "$100/month",
+    price: "$109/month",
   },
   {
     name: "Cross Country",
     grades: "Grades K–12",
-    price: "$100/month",
+    price: "Coming Soon",
   },
   {
     name: "Flag Football",
     grades: "Grades K–5, 6–8, High School",
-    price: "$150/month",
+    price: "Coming Soon",
   },
 ];
 
@@ -95,7 +95,7 @@ export default function Home() {
           find the right fit for their athlete.
         </p>
 
-        <div className="mt-10 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
           {programs.map((program) => (
             <div
               key={program.name}

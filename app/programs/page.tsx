@@ -7,22 +7,22 @@ type Program = {
 const programs: Program[] = [
   {
     name: "Basketball",
-    price: "$155/month",
+    price: "$159/month",
     description: "Competitive training, development, and tournaments.",
   },
   {
     name: "Soccer",
-    price: "$100/month",
+    price: "$109/month",
     description: "Structured practices, development, and competitive play.",
   },
   {
     name: "Cross Country",
-    price: "$100/month",
+    price: "Coming Soon",
     description: "Endurance, race prep, and fitness development.",
   },
   {
     name: "Flag Football",
-    price: "$150/month",
+    price: "Coming Soon",
     description: "Speed, teamwork, and competitive play.",
   },
 ];
