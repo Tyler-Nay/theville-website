@@ -24,35 +24,35 @@ function GalleryCard({ image }: { image: GalleryImage }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (imageList.length <= 1) {
-      return;
-    }
+    if (imageList.length <= 1) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length);
-    }, 3000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [imageList.length]);
 
   return (
-    <div className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-900 text-left shadow-[0_0_40px_rgba(122,0,25,0.08)]">
+    <article className="w-full max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-900 text-left shadow-[0_0_40px_rgba(122,0,25,0.1)]">
       {/* IMAGE SLIDESHOW */}
-      <div className="relative h-[320px] w-full overflow-hidden bg-black">
+      <div className="relative w-full overflow-hidden bg-black">
         <div
-          className="flex h-full transition-transform duration-700 ease-in-out"
+          className="flex transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
         >
           {imageList.map((url, index) => (
-            <div key={index} className="relative h-full min-w-full">
+            <div key={index} className="min-w-full">
               <Image
                 src={url}
                 alt={image.caption || "The Ville Gallery"}
-                fill
-                className="object-cover transition duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                width={1600}
+                height={1200}
+                className="h-[500px] w-full object-contain bg-black"
+                sizes="100vw"
+                priority={index === 0}
               />
             </div>
           ))}
@@ -60,12 +60,17 @@ function GalleryCard({ image }: { image: GalleryImage }) {
 
         {/* DOTS */}
         {imageList.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur">
             {imageList.map((_, index) => (
-              <span
+              <button
                 key={index}
-                className={`h-2 w-2 rounded-full transition-all ${
-                  currentIndex === index ? "bg-white" : "bg-white/40"
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`View image ${index + 1}`}
+                className={`h-2.5 w-2.5 rounded-full transition-all ${
+                  currentIndex === index
+                    ? "bg-white"
+                    : "bg-white/40 hover:bg-white/70"
                 }`}
               />
             ))}
@@ -90,12 +95,12 @@ function GalleryCard({ image }: { image: GalleryImage }) {
         </div>
 
         {image.caption && (
-          <p className="mt-5 text-lg leading-7 text-zinc-200">
+          <h2 className="mt-5 text-2xl font-black uppercase text-white">
             {image.caption}
-          </p>
+          </h2>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -126,7 +131,7 @@ export default function GalleryPage() {
   }, []);
 
   return (
-    <main className="mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
+    <main className="mx-auto flex max-w-6xl flex-col items-center px-6 py-20 text-center">
       {/* HEADER */}
       <section className="max-w-5xl">
         <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
@@ -193,9 +198,9 @@ export default function GalleryPage() {
         </section>
       )}
 
-      {/* GALLERY GRID */}
+      {/* GALLERY FEED */}
       {!loading && !hasError && images.length > 0 && (
-        <section className="mt-16 grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-16 flex w-full flex-col items-center gap-10">
           {images.map((image) => (
             <GalleryCard key={image.id} image={image} />
           ))}
