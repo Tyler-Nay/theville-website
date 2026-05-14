@@ -13,18 +13,55 @@ export default function NewEventPage() {
   const [description, setDescription] = useState("");
   const [sport, setSport] = useState("Basketball");
   const [type, setType] = useState("Tournament");
+
   const [imageLabel, setImageLabel] = useState("");
+  const [eventImage, setEventImage] = useState<File | null>(null);
+
+  const [registrationType, setRegistrationType] = useState("external");
+
   const [link, setLink] = useState("");
   const [paymentUrl, setPaymentUrl] = useState("");
+
+  const [squarePaymentUrl, setSquarePaymentUrl] = useState("");
+  const [waiverUrl, setWaiverUrl] = useState("");
+  const [mediaReleaseUrl, setMediaReleaseUrl] = useState("");
+
   const [buttonText, setButtonText] = useState("Register");
+
   const [featured, setFeatured] = useState(false);
   const [published, setPublished] = useState(true);
+
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     setMessage("Saving event...");
+
+    let uploadedImageUrl = "";
+
+    if (eventImage) {
+      const fileExt = eventImage.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("gallery")
+        .upload(fileName, eventImage, {
+          upsert: true,
+        });
+
+      if (uploadError) {
+        setMessage("Image upload error: " + uploadError.message);
+        return;
+      }
+
+      const { data } = supabase.storage
+        .from("gallery")
+        .getPublicUrl(fileName);
+
+      uploadedImageUrl = data.publicUrl;
+    }
+
 
     const { error } = await supabase.from("events").insert({
       title,
@@ -38,9 +75,23 @@ export default function NewEventPage() {
       type,
       tags: [sport, type],
       image_label: imageLabel || title,
-      link: link || paymentUrl || "https://the-ville.gymdesk.com/signup",
+      image_url: uploadedImageUrl,
+
+      registration_type: registrationType,
+
+      link:
+        registrationType === "custom"
+          ? `/events`
+          : link || paymentUrl || "https://the-ville.gymdesk.com/signup",
+
       payment_url: paymentUrl,
+
+      square_payment_url: squarePaymentUrl,
+      waiver_url: waiverUrl,
+      media_release_url: mediaReleaseUrl,
+
       button_text: buttonText,
+
       featured,
       published,
     });
@@ -50,7 +101,11 @@ export default function NewEventPage() {
       return;
     }
 
-    setMessage("Event saved successfully.");
+    setMessage(
+      featured
+        ? "Event saved successfully and set as featured."
+        : "Event saved successfully."
+    );
 
     setTitle("");
     setEventDatetime("");
@@ -60,10 +115,21 @@ export default function NewEventPage() {
     setDescription("");
     setSport("Basketball");
     setType("Tournament");
+
     setImageLabel("");
+    setEventImage(null);
+
+    setRegistrationType("external");
+
     setLink("");
     setPaymentUrl("");
+
+    setSquarePaymentUrl("");
+    setWaiverUrl("");
+    setMediaReleaseUrl("");
+
     setButtonText("Register");
+
     setFeatured(false);
     setPublished(true);
   }
@@ -79,7 +145,10 @@ export default function NewEventPage() {
           Add Event
         </h1>
 
-        <form onSubmit={handleSubmit} className="mt-10 w-full space-y-5 text-left">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-10 w-full space-y-5 text-left"
+        >
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -99,7 +168,7 @@ export default function NewEventPage() {
           <input
             value={eventDate}
             onChange={(e) => setEventDate(e.target.value)}
-            placeholder="Display date, example: May 23, 2026"
+            placeholder="Display date"
             required
             className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
           />
@@ -160,16 +229,53 @@ export default function NewEventPage() {
           />
 
           <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setEventImage(e.target.files?.[0] || null)}
+            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
+          />
+
+          <select
+            value={registrationType}
+            onChange={(e) => setRegistrationType(e.target.value)}
+            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
+          >
+            <option value="external">External Registration</option>
+            <option value="custom">Custom Website Registration</option>
+          </select>
+
+          <input
             value={link}
             onChange={(e) => setLink(e.target.value)}
-            placeholder="Registration link, Gymdesk/Jotform/etc."
+            placeholder="External registration link"
             className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
           />
 
           <input
             value={paymentUrl}
             onChange={(e) => setPaymentUrl(e.target.value)}
-            placeholder="Square payment link, optional"
+            placeholder="Optional payment URL"
+            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
+          />
+
+          <input
+            value={squarePaymentUrl}
+            onChange={(e) => setSquarePaymentUrl(e.target.value)}
+            placeholder="Square payment URL"
+            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
+          />
+
+          <input
+            value={waiverUrl}
+            onChange={(e) => setWaiverUrl(e.target.value)}
+            placeholder="Waiver URL"
+            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
+          />
+
+          <input
+            value={mediaReleaseUrl}
+            onChange={(e) => setMediaReleaseUrl(e.target.value)}
+            placeholder="Media release URL"
             className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
           />
 

@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+
 const programs = [
   {
     name: "Basketball",
@@ -21,7 +26,44 @@ const programs = [
   },
 ];
 
+type FeaturedEvent = {
+  id: number;
+  title: string;
+  event_date: string | null;
+  event_time: string | null;
+  location: string | null;
+  description: string | null;
+  sport: string | null;
+  type: string | null;
+  button_text: string | null;
+  featured: boolean;
+  published: boolean;
+  created_at: string;
+};
+
 export default function Home() {
+  const [featuredEvent, setFeaturedEvent] =
+    useState<FeaturedEvent | null>(null);
+
+  useEffect(() => {
+    async function getFeaturedEvent() {
+      const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .eq("published", true)
+        .eq("featured", true)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (!error && data) {
+        setFeaturedEvent(data);
+      }
+    }
+
+    getFeaturedEvent();
+  }, []);
+
   return (
     <main>
       {/* HERO */}
@@ -50,26 +92,19 @@ export default function Home() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-zinc-300">
-            The Ville Athletics is a Las Vegas-based, community-driven youth sports
-            organization serving athletes from grades K–12.
+            The Ville Athletics is a Las Vegas-based,
+            community-driven youth sports organization
+            serving athletes from grades K–12.
           </p>
 
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-zinc-400">
-            Built to support local families, develop disciplined athletes, and create
-            positive opportunities through basketball, soccer, cross country, and flag
-            football.
+            Built to support local families, develop
+            disciplined athletes, and create positive
+            opportunities through basketball, soccer,
+            cross country, and flag football.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="https://the-ville.gymdesk.com/signup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-[var(--ville-red)] px-8 py-4 text-base font-bold text-white transition hover:bg-[var(--ville-red-bright)]"
-            >
-              Register
-            </a>
-
             <a
               href="/programs"
               className="rounded-full border border-white/20 px-8 py-4 text-base font-bold text-white transition hover:border-[var(--ville-red)]"
@@ -79,6 +114,80 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FEATURED EVENT */}
+      {featuredEvent && (
+        <section className="mx-auto max-w-7xl px-6 py-20">
+          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-8 shadow-[0_0_60px_rgba(122,0,25,0.18)] md:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+              <div className="rounded-[1.5rem] border border-[var(--ville-red-bright)]/30 bg-[var(--ville-red)]/15 p-8 text-center">
+                <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
+                  Featured Event
+                </p>
+
+                <h2 className="mt-5 text-4xl font-black uppercase leading-none text-white md:text-5xl">
+                  {featuredEvent.event_date ||
+                    "Date TBA"}
+                </h2>
+
+                <p className="mt-4 text-lg font-bold text-zinc-300">
+                  {featuredEvent.event_time ||
+                    "Time TBA"}
+                </p>
+
+                {featuredEvent.location && (
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400">
+                    {featuredEvent.location}
+                  </p>
+                )}
+              </div>
+
+              <div className="text-center lg:text-left">
+                <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+                  {featuredEvent.sport && (
+                    <span className="rounded-full bg-[var(--ville-red-bright)]/20 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-[var(--ville-red-bright)]">
+                      {featuredEvent.sport}
+                    </span>
+                  )}
+
+                  {featuredEvent.type && (
+                    <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-zinc-300">
+                      {featuredEvent.type}
+                    </span>
+                  )}
+                </div>
+
+                <h2 className="mt-5 text-4xl font-black uppercase leading-tight text-white md:text-5xl">
+                  {featuredEvent.title}
+                </h2>
+
+                {featuredEvent.description && (
+                  <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-300">
+                    {featuredEvent.description}
+                  </p>
+                )}
+
+                <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                  <a
+                    href={`/events/${featuredEvent?.id}/register`}
+                    className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+                  >
+                    {featuredEvent?.button_text ||
+                      "Register"}
+                  </a>
+
+                  <a
+                    href="/events"
+                    className="rounded-full border border-white/15 px-7 py-3 text-sm font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
+                  >
+                    View All Events
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* PROGRAMS SECTION */}
       <section className="mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
@@ -91,8 +200,9 @@ export default function Home() {
         </h2>
 
         <p className="mt-4 max-w-3xl text-zinc-400">
-          Programs are built for different age groups so families can quickly
-          find the right fit for their athlete.
+          Programs are built for different age groups so
+          families can quickly find the right fit for
+          their athlete.
         </p>
 
         <div className="mt-12 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -105,7 +215,9 @@ export default function Home() {
                 {program.price}
               </p>
 
-              <h3 className="mt-1 text-xl font-black">{program.name}</h3>
+              <h3 className="mt-1 text-xl font-black">
+                {program.name}
+              </h3>
 
               <p className="mt-1 text-sm font-semibold text-zinc-300">
                 {program.grades}

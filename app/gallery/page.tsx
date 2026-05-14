@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -24,7 +23,9 @@ function GalleryCard({ image }: { image: GalleryImage }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (imageList.length <= 1) return;
+    if (imageList.length <= 1) {
+      return;
+    }
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length);
@@ -34,9 +35,9 @@ function GalleryCard({ image }: { image: GalleryImage }) {
   }, [imageList.length]);
 
   return (
-    <article className="w-full max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-900 text-left shadow-[0_0_40px_rgba(122,0,25,0.1)]">
+    <article className="mb-6 break-inside-avoid overflow-hidden rounded-3xl border border-white/10 bg-zinc-900 text-left shadow-[0_0_35px_rgba(122,0,25,0.08)]">
       {/* IMAGE SLIDESHOW */}
-      <div className="relative w-full overflow-hidden bg-black">
+      <div className="relative overflow-hidden bg-black">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{
@@ -45,29 +46,24 @@ function GalleryCard({ image }: { image: GalleryImage }) {
         >
           {imageList.map((url, index) => (
             <div key={index} className="min-w-full">
-              <Image
+              <img
                 src={url}
                 alt={image.caption || "The Ville Gallery"}
-                width={1600}
-                height={1200}
-                className="h-[500px] w-full object-contain bg-black"
-                sizes="100vw"
-                priority={index === 0}
+                className="block h-auto max-h-[420px] w-full object-contain"
               />
             </div>
           ))}
         </div>
 
-        {/* DOTS */}
         {imageList.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur">
+          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur">
             {imageList.map((_, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`View image ${index + 1}`}
-                className={`h-2.5 w-2.5 rounded-full transition-all ${
+                className={`h-2 w-2 rounded-full transition-all ${
                   currentIndex === index
                     ? "bg-white"
                     : "bg-white/40 hover:bg-white/70"
@@ -78,28 +74,29 @@ function GalleryCard({ image }: { image: GalleryImage }) {
         )}
       </div>
 
-      {/* CONTENT */}
-      <div className="p-6">
-        <div className="flex flex-wrap gap-2">
-          {image.sport && (
-            <span className="rounded-full bg-[var(--ville-red-bright)]/20 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-[var(--ville-red-bright)]">
-              {image.sport}
-            </span>
-          )}
+      {(image.sport || image.category || image.caption) && (
+        <div className="p-5">
+          <div className="flex flex-wrap gap-2">
+            {image.sport && (
+              <span className="rounded-full bg-[var(--ville-red-bright)]/20 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-[var(--ville-red-bright)]">
+                {image.sport}
+              </span>
+            )}
 
-          {image.category && (
-            <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-zinc-300">
-              {image.category}
-            </span>
+            {image.category && (
+              <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-zinc-300">
+                {image.category}
+              </span>
+            )}
+          </div>
+
+          {image.caption && (
+            <h2 className="mt-4 text-xl font-black uppercase text-white">
+              {image.caption}
+            </h2>
           )}
         </div>
-
-        {image.caption && (
-          <h2 className="mt-5 text-2xl font-black uppercase text-white">
-            {image.caption}
-          </h2>
-        )}
-      </div>
+      )}
     </article>
   );
 }
@@ -131,7 +128,7 @@ export default function GalleryPage() {
   }, []);
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col items-center px-6 py-20 text-center">
+    <main className="mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
       {/* HEADER */}
       <section className="max-w-5xl">
         <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
@@ -154,9 +151,7 @@ export default function GalleryPage() {
       {/* LOADING */}
       {loading && (
         <section className="mt-16 w-full rounded-3xl border border-white/10 bg-zinc-900 p-8">
-          <p className="text-lg font-bold text-zinc-300">
-            Loading gallery...
-          </p>
+          <p className="text-lg font-bold text-zinc-300">Loading gallery...</p>
         </section>
       )}
 
@@ -198,9 +193,9 @@ export default function GalleryPage() {
         </section>
       )}
 
-      {/* GALLERY FEED */}
+      {/* MASONRY GALLERY */}
       {!loading && !hasError && images.length > 0 && (
-        <section className="mt-16 flex w-full flex-col items-center gap-10">
+        <section className="mt-16 w-full columns-1 gap-6 sm:columns-2 lg:columns-3">
           {images.map((image) => (
             <GalleryCard key={image.id} image={image} />
           ))}

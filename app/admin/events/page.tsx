@@ -123,9 +123,12 @@ export default function AdminEventsPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-3">
-                    <button className="rounded-full border border-white/10 px-5 py-2 text-sm font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]">
+                    <a
+                      href={`/admin/events/edit/${event.id}`}
+                      className="rounded-full border border-white/10 px-5 py-2 text-sm font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
+                    >
                       Edit
-                    </button>
+                    </a>
 
                     <button className="rounded-full border border-red-500 px-5 py-2 text-sm font-black uppercase text-red-400 transition hover:bg-red-500 hover:text-white">
                       Delete
