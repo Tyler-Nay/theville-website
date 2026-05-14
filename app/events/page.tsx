@@ -251,7 +251,7 @@ export default function EventsPage() {
                     }`}
                   >
                     {/* EVENT IMAGE */}
-                    <div className="relative h-56 overflow-hidden border-b border-white/10 bg-black">
+                    <div className="relative h-[420px] overflow-hidden border-b border-white/10 bg-black">
                       {event.image_url ? (
                         <img
                           src={event.image_url}
@@ -301,10 +301,15 @@ export default function EventsPage() {
                         {event.location}
                       </p>
 
-                      {/* DESCRIPTION */}
-                      <p className="mt-4 leading-8 text-zinc-400">
+                      <details className="mt-4 group">
+                      <summary className="cursor-pointer list-none text-sm font-black uppercase tracking-[0.15em] text-[var(--ville-red-bright)] transition hover:text-white">
+                        Read More
+                      </summary>
+
+                      <p className="mt-4 text-base leading-8 text-zinc-400">
                         {event.description}
                       </p>
+                    </details>
 
                       {/* EXTRA TAGS */}
                       {event.tags &&
