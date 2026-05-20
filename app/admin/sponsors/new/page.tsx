@@ -8,27 +8,49 @@ export default function NewSponsorPage() {
   const [name, setName] = useState("");
   const [tier, setTier] = useState("Bronze");
   const [websiteUrl, setWebsiteUrl] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
   const [description, setDescription] = useState("");
   const [published, setPublished] = useState(true);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
     setMessage("Saving sponsor...");
 
+    let logoUrl = "";
+
+    if (logoFile) {
+      const fileExt = logoFile.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `logos/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("sponsors")
+        .upload(filePath, logoFile);
+
+      if (uploadError) {
+        setMessage("Logo upload error: " + uploadError.message);
+        return;
+      }
+
+      const { data } = supabase.storage
+        .from("sponsors")
+        .getPublicUrl(filePath);
+
+      logoUrl = data.publicUrl;
+    }
+
     const { error } = await supabase.from("sponsors").insert({
-      name: name,
-      tier: tier,
+      name,
+      tier,
       website_url: websiteUrl,
       logo_url: logoUrl,
-      description: description,
-      published: published,
+      description,
+      published,
     });
 
     if (error) {
-      setMessage("Error: " + error.message);
+      setMessage("Database error: " + error.message);
       return;
     }
 
@@ -37,9 +59,9 @@ export default function NewSponsorPage() {
     setName("");
     setTier("Bronze");
     setWebsiteUrl("");
-    setLogoUrl("");
     setDescription("");
     setPublished(true);
+    setLogoFile(null);
   }
 
   return (
@@ -54,8 +76,8 @@ export default function NewSponsorPage() {
         </h1>
 
         <p className="mt-6 text-zinc-400">
-          Add sponsor information for the website. Logo uploads can be added
-          later; for now, paste a logo URL if available.
+          Add sponsor information, upload their logo, and publish them to the
+          sponsor page.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-10 space-y-5">
@@ -88,9 +110,9 @@ export default function NewSponsorPage() {
           />
 
           <input
-            value={logoUrl}
-            onChange={(event) => setLogoUrl(event.target.value)}
-            placeholder="Logo image URL"
+            type="file"
+            accept="image/*"
+            onChange={(event) => setLogoFile(event.target.files?.[0] || null)}
             className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
           />
 

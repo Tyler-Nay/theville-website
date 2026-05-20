@@ -37,36 +37,55 @@ const sponsorshipAreas = [
 
 const sponsorTiers = [
   {
-    tier: "Community Partner",
+    tier: "Bronze",
     accent: "text-zinc-300",
     border: "border-white/10",
   },
   {
-    tier: "Program Partner",
+    tier: "Silver",
+    accent: "text-zinc-200",
+    border: "border-white/20",
+  },
+  {
+    tier: "Gold",
     accent: "text-[var(--ville-red-bright)]",
     border: "border-[var(--ville-red)]",
   },
   {
-    tier: "Premier Partner",
+    tier: "Platinum",
     accent: "text-white",
-    border: "border-white/20",
+    border: "border-white/30",
+  },
+  {
+    tier: "Community Partner",
+    accent: "text-[var(--ville-red-bright)]",
+    border: "border-[var(--ville-red)]",
+  },
+  {
+    tier: "Title Sponsor",
+    accent: "text-white",
+    border: "border-white/30",
   },
 ];
 
 export default function SponsorsPage() {
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchSponsors() {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("sponsors")
         .select("*")
         .eq("published", true)
-        .order("created_at", { ascending: false });
+        .order("id", { ascending: false });
 
-      if (data) {
-        setSponsors(data);
+      if (error) {
+        setError(error.message);
+        return;
       }
+
+      setSponsors(data || []);
     }
 
     fetchSponsors();
@@ -90,6 +109,12 @@ export default function SponsorsPage() {
         </p>
       </section>
 
+      {error && (
+        <p className="mt-8 rounded-xl border border-red-500/30 bg-red-950/40 p-4 text-red-300">
+          Sponsor error: {error}
+        </p>
+      )}
+
       <section className="mt-16 grid w-full gap-6 md:grid-cols-2 xl:grid-cols-4">
         {sponsorshipAreas.map((item) => (
           <div
@@ -111,24 +136,24 @@ export default function SponsorsPage() {
           Partner With Us
         </h2>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {sponsorTiers.map((tier) => (
-          <div
-            key={tier.tier}
-            className={`rounded-3xl border ${tier.border} bg-zinc-900 p-10 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(122,0,25,0.2)]`}
-          >
-            <p
-              className={`text-sm font-black uppercase tracking-[0.3em] ${tier.accent}`}
+        <div className="mt-12 grid gap-6 md:grid-cols-3 xl:grid-cols-6">
+          {sponsorTiers.map((tier) => (
+            <div
+              key={tier.tier}
+              className={`rounded-3xl border ${tier.border} bg-zinc-900 p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(122,0,25,0.2)]`}
             >
-              The Ville Athletics
-            </p>
+              <p
+                className={`text-xs font-black uppercase tracking-[0.25em] ${tier.accent}`}
+              >
+                The Ville
+              </p>
 
-            <h3 className="mt-5 text-3xl font-black uppercase">
-              {tier.tier}
-            </h3>
-          </div>
-        ))}
-      </div>
+              <h3 className="mt-5 text-xl font-black uppercase">
+                {tier.tier}
+              </h3>
+            </div>
+          ))}
+        </div>
       </section>
 
       {sponsors.length > 0 && (
@@ -148,22 +173,24 @@ export default function SponsorsPage() {
                 href={sponsor.website_url || "#"}
                 target={sponsor.website_url ? "_blank" : undefined}
                 rel={sponsor.website_url ? "noopener noreferrer" : undefined}
-                className="rounded-3xl border border-white/10 bg-zinc-900 p-8 text-left transition hover:border-[var(--ville-red)]"
+                className="rounded-3xl border border-white/10 bg-zinc-900 p-8 text-left transition hover:-translate-y-1 hover:border-[var(--ville-red)]"
               >
                 {sponsor.logo_url ? (
-                  <img
-                    src={sponsor.logo_url}
-                    alt={sponsor.name}
-                    className="mb-6 max-h-20 w-auto"
-                  />
+                  <div className="mb-6 flex h-32 items-center justify-center rounded-2xl bg-white p-5">
+                    <img
+                      src={sponsor.logo_url}
+                      alt={sponsor.name}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
                 ) : (
-                  <div className="mb-6 flex h-20 items-center justify-center rounded-2xl bg-black text-zinc-500">
+                  <div className="mb-6 flex h-32 items-center justify-center rounded-2xl bg-black text-zinc-500">
                     Logo
                   </div>
                 )}
 
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--ville-red-bright)]">
-                  {sponsor.tier}
+                  {sponsor.tier || "Sponsor"}
                 </p>
 
                 <h3 className="mt-3 text-2xl font-black uppercase">
