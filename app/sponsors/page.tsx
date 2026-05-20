@@ -48,8 +48,8 @@ const sponsorTiers = [
   },
   {
     tier: "Gold",
-    accent: "text-[var(--ville-red-bright)]",
-    border: "border-[var(--ville-red)]",
+    accent: "text-white",
+    border: "border-white/20",
   },
   {
     tier: "Platinum",
@@ -58,8 +58,8 @@ const sponsorTiers = [
   },
   {
     tier: "Community Partner",
-    accent: "text-[var(--ville-red-bright)]",
-    border: "border-[var(--ville-red)]",
+    accent: "text-white",
+    border: "border-white/20",
   },
   {
     tier: "Title Sponsor",
