@@ -97,7 +97,7 @@ export default function NewsPage() {
 
       <Reveal delay={0.08}>
         <section className="mt-12 grid gap-7 lg:grid-cols-[260px_1fr]">
-          <aside className="sticky top-28 h-fit rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-5">
+          <aside className="h-fit rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-5 lg:sticky lg:top-28">
             <h2 className="text-xl font-black uppercase">Find Updates</h2>
 
             <div className="mt-5">
