@@ -35,10 +35,18 @@ type FeaturedEvent = {
   description: string | null;
   sport: string | null;
   type: string | null;
+
   button_text: string | null;
+
   image_url: string | null;
+
   featured: boolean;
   published: boolean;
+
+  registration_type: string | null;
+  link: string | null;
+  show_registration_button: boolean;
+
   created_at: string;
 };
 
@@ -114,12 +122,12 @@ export default function Home() {
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-6 shadow-[0_0_60px_rgba(122,0,25,0.18)] md:p-10">
             <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
               {/* FLYER */}
-              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-2xl">
+              <div className="flex items-center justify-center rounded-[2rem] border border-white/10 bg-black p-4 shadow-2xl">
                 {featuredEvent.image_url ? (
                   <img
                     src={featuredEvent.image_url}
                     alt={featuredEvent.title}
-                    className="h-full max-h-[700px] w-full object-cover"
+                    className="h-auto max-h-[900px] w-full rounded-2xl object-contain"
                   />
                 ) : (
                   <div className="flex h-[420px] items-center justify-center bg-zinc-950 text-sm font-black uppercase tracking-[0.3em] text-zinc-600">
@@ -184,12 +192,18 @@ export default function Home() {
                 )}
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
-                  <a
-                    href={`/events/${featuredEvent.id}/register`}
-                    className="rounded-full bg-[var(--ville-red)] px-8 py-4 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
-                  >
-                    {featuredEvent.button_text || "Register"}
-                  </a>
+                  {featuredEvent.show_registration_button && (
+                    <a
+                      href={
+                        featuredEvent.registration_type === "custom"
+                          ? `/events/${featuredEvent.id}/register`
+                          : featuredEvent.link || "#"
+                      }
+                      className="rounded-full bg-[var(--ville-red)] px-8 py-4 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
+                    >
+                      {featuredEvent.button_text || "Register"}
+                    </a>
+                  )}
 
                   <a
                     href="/events"

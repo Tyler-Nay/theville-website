@@ -26,6 +26,7 @@ export default function EditEventPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [eventImage, setEventImage] = useState<File | null>(null);
 
+  const [showRegistrationButton, setShowRegistrationButton] = useState(true);
   const [registrationType, setRegistrationType] = useState("external");
 
   const [link, setLink] = useState("");
@@ -67,6 +68,7 @@ export default function EditEventPage() {
       setImageLabel(data.image_label || "");
       setImageUrl(data.image_url || "");
 
+      setShowRegistrationButton(data.show_registration_button ?? true);
       setRegistrationType(data.registration_type || "external");
 
       setLink(data.link || "");
@@ -134,16 +136,17 @@ export default function EditEventPage() {
         image_label: imageLabel,
         image_url: finalImageUrl,
 
+        show_registration_button: showRegistrationButton,
         registration_type: registrationType,
 
-        link,
+        link: showRegistrationButton && registrationType === "external" ? link : "",
         payment_url: paymentUrl,
 
         square_payment_url: squarePaymentUrl,
         waiver_url: waiverUrl,
         media_release_url: mediaReleaseUrl,
 
-        button_text: buttonText,
+        button_text: buttonText || "Register",
 
         featured,
         published,
@@ -178,53 +181,19 @@ export default function EditEventPage() {
         <h1 className="mt-4 text-5xl font-black uppercase">Edit Event</h1>
 
         <form onSubmit={handleSave} className="mt-10 space-y-5">
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Event title"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Event title" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            value={eventDate}
-            onChange={(e) => setEventDate(e.target.value)}
-            placeholder="Display date"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Display date" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            value={eventTime}
-            onChange={(e) => setEventTime(e.target.value)}
-            placeholder="Display time"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={eventTime} onChange={(e) => setEventTime(e.target.value)} placeholder="Display time" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            type="datetime-local"
-            value={eventDatetime}
-            onChange={(e) => setEventDatetime(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input type="datetime-local" value={eventDatetime} onChange={(e) => setEventDatetime(e.target.value)} className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-            className="min-h-32 w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="min-h-32 w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <select
-            value={sport}
-            onChange={(e) => setSport(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          >
+          <select value={sport} onChange={(e) => setSport(e.target.value)} className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white">
             <option>Basketball</option>
             <option>Cross Country</option>
             <option>Flag Football</option>
@@ -232,11 +201,7 @@ export default function EditEventPage() {
             <option>Everyone</option>
           </select>
 
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          >
+          <select value={type} onChange={(e) => setType(e.target.value)} className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white">
             <option>Tournament</option>
             <option>Training</option>
             <option>Camp</option>
@@ -245,112 +210,59 @@ export default function EditEventPage() {
             <option>Fundraiser</option>
           </select>
 
-          <input
-            value={imageLabel}
-            onChange={(e) => setImageLabel(e.target.value)}
-            placeholder="Image label"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={imageLabel} onChange={(e) => setImageLabel(e.target.value)} placeholder="Image label" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
           <div className="space-y-4">
             {imageUrl && (
               <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
-                <img
-                  src={imageUrl}
-                  alt="Current event"
-                  className="h-64 w-full object-cover"
-                />
+                <img src={imageUrl} alt="Current event" className="h-64 w-full object-cover" />
               </div>
             )}
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setEventImage(e.target.files?.[0] || null)}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white file:mr-4 file:rounded-full file:border-0 file:bg-[var(--ville-red)] file:px-4 file:py-2 file:text-sm file:font-bold file:text-white"
-            />
+            <input type="file" accept="image/*" onChange={(e) => setEventImage(e.target.files?.[0] || null)} className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white file:mr-4 file:rounded-full file:border-0 file:bg-[var(--ville-red)] file:px-4 file:py-2 file:text-sm file:font-bold file:text-white" />
 
-            <input
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              placeholder="Image URL"
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-            />
+            <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Image URL" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
           </div>
 
-          <select
-            value={registrationType}
-            onChange={(e) => setRegistrationType(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          >
-            <option value="external">External Registration</option>
-            <option value="custom">Custom Website Registration</option>
-          </select>
+          <label className="flex items-center gap-3 text-white">
+            <input type="checkbox" checked={showRegistrationButton} onChange={(e) => setShowRegistrationButton(e.target.checked)} />
+            Show registration button
+          </label>
 
-          <input
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            placeholder="Registration link"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          {showRegistrationButton && (
+            <>
+              <select value={registrationType} onChange={(e) => setRegistrationType(e.target.value)} className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white">
+                <option value="external">Use external registration link</option>
+                <option value="custom">Use website registration page</option>
+              </select>
 
-          <input
-            value={paymentUrl}
-            onChange={(e) => setPaymentUrl(e.target.value)}
-            placeholder="Payment URL"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+              {registrationType === "external" && (
+                <input value={link} onChange={(e) => setLink(e.target.value)} placeholder="External registration link" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
+              )}
 
-          <input
-            value={squarePaymentUrl}
-            onChange={(e) => setSquarePaymentUrl(e.target.value)}
-            placeholder="Square payment URL"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+              <input value={buttonText} onChange={(e) => setButtonText(e.target.value)} placeholder="Button text" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
+            </>
+          )}
 
-          <input
-            value={waiverUrl}
-            onChange={(e) => setWaiverUrl(e.target.value)}
-            placeholder="Waiver URL"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={paymentUrl} onChange={(e) => setPaymentUrl(e.target.value)} placeholder="Payment URL" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            value={mediaReleaseUrl}
-            onChange={(e) => setMediaReleaseUrl(e.target.value)}
-            placeholder="Media release URL"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={squarePaymentUrl} onChange={(e) => setSquarePaymentUrl(e.target.value)} placeholder="Square payment URL" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
-          <input
-            value={buttonText}
-            onChange={(e) => setButtonText(e.target.value)}
-            placeholder="Button text"
-            className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
-          />
+          <input value={waiverUrl} onChange={(e) => setWaiverUrl(e.target.value)} placeholder="Waiver URL" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
+
+          <input value={mediaReleaseUrl} onChange={(e) => setMediaReleaseUrl(e.target.value)} placeholder="Media release URL" className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white" />
 
           <label className="flex items-center gap-3 text-white">
-            <input
-              type="checkbox"
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-            />
+            <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
             Featured Event
           </label>
 
           <label className="flex items-center gap-3 text-white">
-            <input
-              type="checkbox"
-              checked={published}
-              onChange={(e) => setPublished(e.target.checked)}
-            />
+            <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} />
             Published
           </label>
 
-          <button
-            type="submit"
-            className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-sm font-black uppercase text-white"
-          >
+          <button type="submit" className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-sm font-black uppercase text-white">
             Save Changes
           </button>
         </form>

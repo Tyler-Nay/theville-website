@@ -26,12 +26,16 @@ export default function EventRegisterPage() {
   const [athleteLastName, setAthleteLastName] = useState("");
   const [athleteGrade, setAthleteGrade] = useState("");
   const [athleteAge, setAthleteAge] = useState("");
+  const [sport, setSport] = useState("");
+
   const [guardianName, setGuardianName] = useState("");
   const [guardianEmail, setGuardianEmail] = useState("");
   const [guardianPhone, setGuardianPhone] = useState("");
+
   const [emergencyContact, setEmergencyContact] = useState("");
   const [emergencyPhone, setEmergencyPhone] = useState("");
   const [medicalNotes, setMedicalNotes] = useState("");
+
   const [waiverAgreed, setWaiverAgreed] = useState(false);
   const [mediaReleaseAgreed, setMediaReleaseAgreed] = useState(false);
 
@@ -65,6 +69,11 @@ export default function EventRegisterPage() {
       return;
     }
 
+    if (!sport) {
+      setMessage("Please select a sport.");
+      return;
+    }
+
     if (!waiverAgreed || !mediaReleaseAgreed) {
       setMessage("Please agree to the waiver and media release before continuing.");
       return;
@@ -78,6 +87,7 @@ export default function EventRegisterPage() {
       athlete_last_name: athleteLastName,
       athlete_grade: athleteGrade,
       athlete_age: athleteAge,
+      sport,
       guardian_name: guardianName,
       guardian_email: guardianEmail,
       guardian_phone: guardianPhone,
@@ -150,6 +160,21 @@ export default function EventRegisterPage() {
             placeholder="Athlete age"
             className="rounded-xl border border-white/10 bg-black px-4 py-3 text-white"
           />
+
+          <select
+            value={sport}
+            onChange={(e) => setSport(e.target.value)}
+            required
+            className="rounded-xl border border-white/10 bg-black px-4 py-3 text-white md:col-span-2"
+          >
+            <option value="">Select sport</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Flag Football">Flag Football</option>
+            <option value="Cross Country">Cross Country</option>
+            <option value="Cheerleading">Cheerleading</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
         <input
