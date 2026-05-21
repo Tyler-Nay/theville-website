@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import Reveal from "@/components/Reveal";
 
 type Post = {
   id: number;
@@ -35,7 +36,7 @@ export default function NewsPage() {
         .select("*")
         .eq("published", true)
         .gte("expires_at", new Date().toISOString())
-        .order("expires_at", { ascending: true });;
+        .order("expires_at", { ascending: true });
 
       if (!error && data) {
         setPosts(data);
@@ -61,8 +62,7 @@ export default function NewsPage() {
       const matchesSearch =
         search.trim() === "" || searchText.includes(search.toLowerCase());
 
-      const matchesCategory =
-        category === "All" || post.category === category;
+      const matchesCategory = category === "All" || post.category === category;
 
       return matchesSearch && matchesCategory;
     });
@@ -76,147 +76,151 @@ export default function NewsPage() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-20">
-      <section className="text-center">
-        <p className="text-sm font-black uppercase tracking-[0.3em] text-[var(--ville-red-bright)]">
-          News
-        </p>
+    <main className="mx-auto max-w-6xl px-5 py-16">
+      <Reveal>
+        <section className="text-center">
+          <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--ville-red-bright)]">
+            News
+          </p>
 
-        <h1 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
-          News & Updates
-        </h1>
+          <h1 className="mt-4 text-4xl font-black uppercase leading-none md:text-6xl">
+            News & Updates
+          </h1>
 
-        <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
-          Stay updated with announcements, registrations, tournament updates,
-          athlete opportunities, and important information from The Ville
-          Athletics.
-        </p>
-      </section>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-300">
+            Stay updated with announcements, registrations, tournament updates,
+            athlete opportunities, and important information from The Ville
+            Athletics.
+          </p>
+        </section>
+      </Reveal>
 
-      <section className="mt-14 grid gap-8 lg:grid-cols-[280px_1fr]">
-        <aside className="h-fit rounded-3xl border border-white/10 bg-zinc-900 p-6">
-          <h2 className="text-2xl font-black uppercase">Find Updates</h2>
+      <Reveal delay={0.08}>
+        <section className="mt-12 grid gap-7 lg:grid-cols-[260px_1fr]">
+          <aside className="sticky top-28 h-fit rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-5">
+            <h2 className="text-xl font-black uppercase">Find Updates</h2>
 
-          <div className="mt-5">
-            <label className="text-sm font-bold uppercase text-zinc-400">
-              Search
-            </label>
+            <div className="mt-5">
+              <label className="text-xs font-bold uppercase text-zinc-400">
+                Search
+              </label>
 
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search updates"
-              className="mt-2 w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-[var(--ville-red)]"
-            />
-          </div>
-
-          <div className="mt-6">
-            <label className="text-sm font-bold uppercase text-zinc-400">
-              Category
-            </label>
-
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none transition focus:border-[var(--ville-red)]"
-            >
-              {categories.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {hasFilters && (
-            <button
-              onClick={clearFilters}
-              className="mt-6 w-full rounded-full border border-white/10 px-5 py-2 text-sm font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
-            >
-              Clear Filters
-            </button>
-          )}
-        </aside>
-
-        <section>
-          {loading ? (
-            <div className="rounded-3xl border border-white/10 bg-zinc-900/50 p-12 text-center">
-              <p className="text-2xl font-black uppercase text-white">
-                Loading Updates...
-              </p>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search updates"
+                className="mt-2 w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-[var(--ville-red)]"
+              />
             </div>
-          ) : filteredPosts.length > 0 ? (
-            <>
-              <div className="mb-5">
-                <p className="text-sm font-black uppercase tracking-[0.25em] text-zinc-500">
-                  Showing
+
+            <div className="mt-5">
+              <label className="text-xs font-bold uppercase text-zinc-400">
+                Category
+              </label>
+
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--ville-red)]"
+              >
+                {categories.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {hasFilters && (
+              <button
+                onClick={clearFilters}
+                className="mt-6 w-full rounded-full border border-white/10 px-5 py-2 text-xs font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
+              >
+                Clear Filters
+              </button>
+            )}
+          </aside>
+
+          <section>
+            {loading ? (
+              <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-10 text-center">
+                <p className="text-xl font-black uppercase text-white">
+                  Loading Updates...
+                </p>
+              </div>
+            ) : filteredPosts.length > 0 ? (
+              <>
+                <div className="mb-5">
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-zinc-500">
+                    Showing
+                  </p>
+
+                  <h2 className="text-3xl font-black uppercase tracking-tight">
+                    {filteredPosts.length}{" "}
+                    {filteredPosts.length === 1 ? "Update" : "Updates"}
+                  </h2>
+                </div>
+
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                  {filteredPosts.map((post) => (
+                    <article
+                      key={post.id}
+                      className="group flex min-h-[320px] flex-col rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-6 transition duration-500 hover:-translate-y-1 hover:border-[var(--ville-red)] hover:shadow-[0_15px_50px_rgba(122,0,25,0.22)]"
+                    >
+                      <span className="w-fit rounded-full bg-[var(--ville-red)] px-3 py-1 text-[11px] font-black uppercase text-white">
+                        {post.category}
+                      </span>
+
+                      <h2 className="mt-5 text-xl font-black uppercase leading-tight">
+                        {post.title}
+                      </h2>
+
+                      <p className="mt-3 text-xs font-black uppercase tracking-[0.16em] text-zinc-500">
+                        {post.post_date}
+                      </p>
+
+                      <p className="mt-5 text-sm leading-7 text-zinc-400">
+                        {post.text}
+                      </p>
+
+                      {post.link && (
+                        <a
+                          href={post.link}
+                          className="mt-auto inline-flex w-fit rounded-full border border-white/15 px-5 py-2 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
+                        >
+                          Learn More
+                        </a>
+                      )}
+                    </article>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="rounded-[2rem] border border-dashed border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-10 text-center">
+                <p className="text-2xl font-black uppercase text-white">
+                  No Announcements Posted
                 </p>
 
-                <h2 className="text-3xl font-black uppercase">
-                  {filteredPosts.length}{" "}
-                  {filteredPosts.length === 1 ? "Update" : "Updates"}
-                </h2>
-              </div>
+                <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-zinc-400">
+                  Updates, registration information, tournaments, community
+                  announcements, and important news from The Ville Athletics
+                  will appear here when available.
+                </p>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {filteredPosts.map((post) => (
-                  <article
-                    key={post.id}
-                    className="flex min-h-[320px] flex-col rounded-3xl border border-white/10 bg-zinc-900 p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--ville-red)] hover:shadow-[0_10px_40px_rgba(122,0,25,0.2)]"
+                {hasFilters && (
+                  <button
+                    onClick={clearFilters}
+                    className="mt-6 rounded-full bg-[var(--ville-red)] px-5 py-2 text-xs font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
                   >
-                    <span className="w-fit rounded-full bg-[var(--ville-red)] px-3 py-1 text-xs font-black uppercase text-white">
-                      {post.category}
-                    </span>
-
-                    <h2 className="mt-5 text-2xl font-black uppercase">
-                      {post.title}
-                    </h2>
-
-                    <p className="mt-3 text-sm font-bold uppercase text-zinc-500">
-                      {post.post_date}
-                    </p>
-
-                    <p className="mt-5 leading-7 text-zinc-400">
-                      {post.text}
-                    </p>
-
-                    {post.link && (
-                      <a
-                        href={post.link}
-                        className="mt-auto inline-flex w-fit rounded-full border border-white/15 px-5 py-2 text-sm font-black uppercase text-white transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
-                      >
-                        Learn More
-                      </a>
-                    )}
-                  </article>
-                ))}
+                    Clear Filters
+                  </button>
+                )}
               </div>
-            </>
-          ) : (
-            <div className="rounded-3xl border border-dashed border-white/10 bg-zinc-900/50 p-12 text-center">
-              <p className="text-3xl font-black uppercase text-white">
-                No Announcements Posted
-              </p>
-
-              <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
-                Updates, registration information, tournaments, community
-                announcements, and important news from The Ville Athletics will
-                appear here when available.
-              </p>
-
-              {hasFilters && (
-                <button
-                  onClick={clearFilters}
-                  className="mt-6 rounded-full bg-[var(--ville-red)] px-6 py-3 text-sm font-black uppercase text-white transition hover:bg-[var(--ville-red-bright)]"
-                >
-                  Clear Filters
-                </button>
-              )}
-            </div>
-          )}
+            )}
+          </section>
         </section>
-      </section>
+      </Reveal>
     </main>
   );
 }

@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
-
 :root {
-  --background: #050505;
+  --background: #030303;
   --foreground: #f5f5f5;
+
   --ville-red: #7a0019;
-  --ville-red-bright: #a1122b;
+  --ville-red-bright: #b3132f;
+  --ville-red-dark: #42000d;
+
   --ville-silver: #c7c7c7;
+  --ville-muted: #a1a1aa;
+
+  --card: #111113;
+  --card-soft: #18181b;
+  --border-soft: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -18,11 +25,83 @@ html {
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top center, rgba(122, 0, 25, 0.18), transparent 35%),
+    linear-gradient(180deg, #020202 0%, #050505 45%, #020202 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   text-decoration: none;
+}
+
+::selection {
+  background: var(--ville-red-bright);
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.premium-card {
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+    var(--card);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.premium-border {
+  border: 1px solid var(--border-soft);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  height: 2px;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--ville-red-bright);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }

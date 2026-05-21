@@ -1,131 +1,131 @@
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 
+const quickLinks = [
+  { label: "About", href: "/about" },
+  { label: "Programs", href: "/programs" },
+  { label: "Events", href: "/events" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Sponsors", href: "/sponsors" },
+  { label: "FAQ", href: "/faq" },
+  {
+    label: "Register",
+    href: "https://the-ville.gymdesk.com/signup",
+    external: true,
+  },
+  {
+    label: "Portal",
+    href: "https://the-ville.gymdesk.com/login",
+    external: true,
+  },
+  { label: "Contact", href: "/contact" },
+];
+
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black px-6 py-14">
-      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
-        {/* LOGO */}
-          <div className="flex flex-col items-center justify-center">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-black">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(122,0,25,0.18),transparent_40%)]" />
+
+      <div className="relative mx-auto max-w-6xl px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* LOGO */}
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <Image
               src="/logo.png"
               alt="The Ville Athletics Logo"
-              width={180}
-              height={180}
-              className="drop-shadow-[0_0_25px_rgba(122,0,25,0.35)]"
+              width={145}
+              height={145}
+              className="drop-shadow-[0_0_30px_rgba(122,0,25,0.45)]"
             />
+
+            <p className="mt-5 max-w-xs text-sm leading-7 text-zinc-400">
+              Community-driven youth athletics in Las Vegas focused on
+              developing athletes, leadership, discipline, and opportunity.
+            </p>
           </div>
 
-        {/* ABOUT */}
-        <div>
-          <p className="text-sm font-black uppercase text-white">About Us</p>
+          {/* ORGANIZATION */}
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-white">
+              Organization
+            </p>
 
-          <p className="mt-4 max-w-xs leading-7 text-zinc-400">
-            A Las Vegas-based, community-driven youth sports organization
-            focused on developing athletes and supporting local families.
-          </p>
-        </div>
+            <div className="mt-5 flex flex-col gap-3 text-sm text-zinc-400">
+              <p>Las Vegas, Nevada</p>
+              <p>Basketball</p>
+              <p>Soccer</p>
+              <p>Cross Country</p>
+              <p>Flag Football</p>
+            </div>
+          </div>
 
-        {/* LINKS */}
-        <div>
-          <p className="text-sm font-black uppercase text-white">
-            Links
-          </p>
+          {/* QUICK LINKS */}
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-white">
+              Quick Links
+            </p>
 
-          <div className="mt-4 grid grid-cols-2 gap-x-0 gap-y-3 text-zinc-400">
-            <a
-              href="/about"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              About
-            </a>
+            <div className="mt-5 flex flex-col gap-3 text-sm text-zinc-400">
+              {quickLinks.map((item) =>
+                item.external ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition duration-300 hover:text-[var(--ville-red-bright)]"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="transition duration-300 hover:text-[var(--ville-red-bright)]"
+                  >
+                    {item.label}
+                  </a>
+                )
+              )}
+            </div>
+          </div>
 
-            <a
-              href="/programs"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Programs
-            </a>
+          {/* SOCIAL */}
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-white">
+              Connect
+            </p>
 
-            <a
-              href="/events"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Events
-            </a>
+            <div className="mt-5 flex items-center gap-4">
+              <a
+                href="https://instagram.com/thevillelv"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow The Ville Athletics on Instagram"
+                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-zinc-300 transition duration-300 hover:border-[var(--ville-red)] hover:bg-[var(--ville-red)]/10 hover:text-[var(--ville-red-bright)]"
+              >
+                <FaInstagram size={20} />
+              </a>
+            </div>
 
-            <a
-              href="/gallery"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Gallery
-            </a>
-            <a
-              href="/sponsors"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Sponsors
-            </a>
-
-            <a
-              href="/faq"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              FAQ
-            </a>
-
-            <a
-              href="https://the-ville.gymdesk.com/signup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Register
-            </a>
-
-            <a
-              href="https://the-ville.gymdesk.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Portal
-            </a>
-
-            <a
-              href="/contact"
-              className="transition hover:text-[var(--ville-red-bright)]"
-            >
-              Contact Us
-            </a>
+            <p className="mt-5 max-w-xs text-sm leading-7 text-zinc-500">
+              Follow The Ville Athletics for events, athlete highlights,
+              announcements, and community updates.
+            </p>
           </div>
         </div>
 
-        {/* SOCIAL */}
-        <div>
-          <p className="text-sm font-black uppercase text-white">Socials</p>
+        {/* BOTTOM BAR */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center md:flex-row md:text-left">
+          <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+            © {new Date().getFullYear()} The Ville Athletics. All rights
+            reserved.
+          </p>
 
-          <div className="mt-4 flex items-center gap-4">
-            <a
-              href="https://instagram.com/thevillelv"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow The Ville Athletics on Instagram"
-              className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-zinc-900 text-zinc-300 transition hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
-            >
-              <FaInstagram size={22} />
-            </a>
-          </div>
-
-          <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-500">
-            Follow us for updates, events, athlete highlights, and program
-            announcements.
+          <p className="text-xs uppercase tracking-[0.18em] text-zinc-600">
+            Built In Las Vegas
           </p>
         </div>
-      </div>
-
-      <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-zinc-500">
-        © {new Date().getFullYear()} The Ville Athletics. All rights reserved.
       </div>
     </footer>
   );
