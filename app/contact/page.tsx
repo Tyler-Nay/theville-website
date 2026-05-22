@@ -89,7 +89,7 @@ export default function ContactPage() {
                   href="mailto:lvtheville@gmail.com"
                   className="mt-1 inline-block text-zinc-400 transition hover:text-[var(--ville-red-bright)]"
                 >
-                  lvtheville@gmail.com
+                  info@thevillelv.com
                 </a>
               </div>
 
