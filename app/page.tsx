@@ -78,12 +78,12 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:80px_80px]" />
 
         <Reveal>
-          <div className="relative mx-auto max-w-6xl px-6 py-24 text-center">
+          <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24 text-center">
             <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--ville-red-bright)]">
               Las Vegas Youth Athletics
             </p>
 
-            <h1 className="mt-6 text-5xl font-black uppercase leading-[0.9] md:text-7xl">
+            <h1 className="mt-6 text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.9] md:text-7xl">
               <span className="block text-white">Build the</span>
               <span className="block text-white">Athlete</span>
               <span className="mt-2 block text-[var(--ville-red-bright)]">
@@ -105,18 +105,17 @@ export default function Home() {
               country, and flag football.
             </p>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mt-10 flex w-full flex-col gap-4 sm:flex-row sm:justify-center">
               <a
                 href="/programs"
-                className="rounded-full bg-[var(--ville-red)] px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[var(--ville-red-bright)] hover:shadow-[0_0_30px_rgba(122,0,25,0.35)]"
+                className="w-full sm:w-auto rounded-full bg-[var(--ville-red)] px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[var(--ville-red-bright)] hover:shadow-[0_0_30px_rgba(122,0,25,0.35)]"
               >
                 Explore Programs
               </a>
 
               <a
                 href="/events"
-                className="rounded-full border border-white/15 px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]"
-              >
+                className="w-full sm:w-auto rounded-full border border-white/15 px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-[var(--ville-red)] hover:text-[var(--ville-red-bright)]">
                 View Events
               </a>
             </div>
@@ -135,7 +134,7 @@ export default function Home() {
                     <img
                       src={featuredEvent.image_url}
                       alt={featuredEvent.title}
-                      className="h-auto max-h-[820px] w-full rounded-2xl object-contain"
+                      className="h-auto max-h-[520px] md:max-h-[820px] w-full rounded-2xl object-contain"
                     />
                   ) : (
                     <div className="flex h-[380px] w-full items-center justify-center rounded-2xl bg-zinc-950 text-sm font-black uppercase tracking-[0.3em] text-zinc-600">
@@ -214,7 +213,7 @@ export default function Home() {
                             ? `/events/${featuredEvent.id}/register`
                             : featuredEvent.link || "#"
                         }
-                        className="rounded-full bg-[var(--ville-red)] px-6 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-[var(--ville-red-bright)]"
+                        className="rounded-full bg-[var(--ville-red)] px-6 py-4 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-[var(--ville-red-bright)]"
                       >
                         {featuredEvent.button_text || "Register"}
                       </a>
@@ -254,7 +253,7 @@ export default function Home() {
             {programs.map((program) => (
               <div
                 key={program.name}
-                className="flex flex-col items-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] px-5 py-5 text-center transition duration-300 hover:-translate-y-1 hover:border-[var(--ville-red)] hover:shadow-[0_10px_40px_rgba(122,0,25,0.15)]"
+                className="flex flex-col items-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] px-5 py-5 text-center transition duration-300 hover:-translate-y-1 hover:border-[var(--ville-red)] hover:shadow-[0_10px_40px_rgba(122,0,25,0.15)] active:scale-[0.98]"
               >
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--ville-red-bright)]">
                   {program.price}

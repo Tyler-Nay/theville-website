@@ -102,7 +102,7 @@ export default function Navbar() {
           : "border-transparent bg-black/40 backdrop-blur-xl"
       }`}
     >
-      <nav className="relative mx-auto grid max-w-7xl grid-cols-3 items-center px-4 py-1.5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:max-w-[1400px]">
+      <nav className="relative mx-auto grid h-[74px] max-w-7xl grid-cols-3 items-center px-4 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:max-w-[1400px]">
         {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setOpen(!open)}
@@ -141,8 +141,8 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="The Ville Athletics Logo"
-              width={92}
-              height={92}
+              width={72}
+              height={72}
               priority
               className="drop-shadow-[0_0_45px_rgba(122,0,25,0.4)] transition duration-500 hover:scale-[1.02]"
             />
@@ -237,10 +237,10 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       <div
-        className={`overflow-hidden border-t border-white/10 bg-black/95 backdrop-blur-2xl transition-all duration-500 lg:hidden ${
+        className={`fixed left-0 top-[74px] h-[calc(100vh-74px)] w-full overflow-y-auto border-t border-white/10 bg-black/95 backdrop-blur-2xl transition-transform duration-500 lg:hidden ${
           open
-            ? "max-h-[700px] opacity-100"
-            : "max-h-0 border-transparent opacity-0"
+            ? "translate-x-0 opacity-100"
+            : "-translate-x-full opacity-0 border-transparent"
         }`}
       >
         <div className="px-6 py-7">
