@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import Reveal from "@/components/Reveal";
@@ -125,6 +127,8 @@ export default function GalleryPage() {
         .from("gallery_images")
         .select("*")
         .eq("published", true)
+        .not("image_url", "is", null)
+        .neq("image_url", "")
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -133,7 +137,7 @@ export default function GalleryPage() {
         return;
       }
 
-      setImages(data || []);
+      setImages((data || []) as GalleryImage[]);
       setLoading(false);
     }
 
